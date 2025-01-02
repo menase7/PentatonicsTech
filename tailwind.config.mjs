@@ -11,6 +11,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+        catamaran: ['Catamaran', 'sans-serif'],
+      },
     },
   },
   plugins: [],
