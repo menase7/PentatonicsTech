@@ -15,7 +15,7 @@ export default function Header() {
               alt="logo"
             />
           </div>
-          <p className="text-[#3D59FA] text-2xl font-bold">PentatonicsTech</p>
+          <p className="text-[#3D59FA] text-3xl font-bold">PentatonicsTech</p>
         </div>
         <div className="flex items-center justify-center lg:justify-end gap-4 w-full">
           <div className="flex items-center gap-1 text-[#3D59FA]">
