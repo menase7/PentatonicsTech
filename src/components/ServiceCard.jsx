@@ -1,11 +1,14 @@
 import React from 'react'
 
-export default function ServiceCard() {
+export default function ServiceCard({img, title, description}) {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-catamaran">Welcome to Tailwind CSS</h1>
-      <p className="text-lg font-sans mt-4">
-        This is a paragraph using the Open Sans font.
+    <div className="bg-green-600 mx-4 h-[100px]">
+      <div>
+        <img src={img} alt="img" />
+      </div>
+      <p>{title}</p>
+      <p>
+        {description}
       </p>
     </div>
   )
