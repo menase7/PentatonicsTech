@@ -1,8 +1,6 @@
 import React from "react";
 import ServiceCard from "./ServiceCard";
-import img1 from "../../public/service1.png";
-import img2 from "../../public/service2.png";
-import img3 from "../../public/service4.png";
+
 
 export default function ServiceSection() {
   let services = [

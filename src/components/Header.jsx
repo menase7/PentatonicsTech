@@ -22,7 +22,8 @@ export default function Header() {
             <MdWifiCalling3 />
             <a
               className="text-[#051242] hover:text-[#3D59FA]"
-              href="tel:+251941620480">
+              href="tel:+251941620480"
+            >
               +251941620480
             </a>
           </div>
@@ -30,7 +31,8 @@ export default function Header() {
             <IoMdMail />
             <a
               className="text-[#051242] hover:text-[#3D59FA]"
-              href="mailto:pentatonics77@gmail.com">
+              href="mailto:pentatonics77@gmail.com"
+            >
               pentatonics77@gmail.com
             </a>
           </div>
