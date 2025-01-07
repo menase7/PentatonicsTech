@@ -78,7 +78,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="mailto:pentatonicstech.com">pentatonicstech.com</a>
+              <a href="pentatonics-tech.vercel.app">pentatonicstech.com</a>
             </li>
             <li>
               <address>Addis Ababa, Ethiopia</address>
