@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -45,7 +46,9 @@ export default function Navbar() {
         <div className="mx-6 flex items-center justify-between w-full relative">
           <div className="flex items-center gap-2">
             <div className="h-[40px] w-[40px]">
-              <img
+              <Image
+                width={40}
+                height={40}
                 className="h-full w-full object-cover"
                 src="/logo.jpg"
                 alt="logo"

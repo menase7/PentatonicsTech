@@ -5,7 +5,7 @@ import { IoMdMail } from "react-icons/io";
 
 export default function Header() {
   return (
-    <div className="h-[58px] lg:h-[63px] bg-[#F5FAFF] flex items-center">
+    <div className="sm:h-[58px] lg:h-[63px] bg-[#F5FAFF] flex items-center">
       <div className="max-w-[1300px] mx-auto flex w-full">
         <div className="max-lg:hidden flex items-center gap-1">
           <div className="h-[40px] w-[40px]">
@@ -17,7 +17,7 @@ export default function Header() {
           </div>
           <p className="text-[#3D59FA] text-3xl font-bold">PentatonicsTech</p>
         </div>
-        <div className="flex items-center justify-center lg:justify-end gap-4 w-full">
+        <div className="flex items-center justify-center flex-wrap lg:justify-end max-sm:py-2 gap-4 w-full">
           <div className="flex items-center gap-1 text-[#3D59FA]">
             <MdWifiCalling3 />
             <a
