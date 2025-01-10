@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ContactForm() {
   return (
-    <div className="bg-[#F5FAFF]">
+    <div className="bg-[#F5FAFF]" id="contact">
       <div className="text-center py-20 max-w-[1300px] mx-auto space-y-3">
         <h2 className="text-[14px] text-[#3D59FA]">Contact Us</h2>
         <h1 className="text-[25px] md:text-[35px] lg:text-[40px] font-bold text-[#051242]">Let Us Know About Your Project Idea!</h1>

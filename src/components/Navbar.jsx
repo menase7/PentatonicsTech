@@ -6,6 +6,17 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    const target = document.getElementById("contact");
+
+    setTimeout(() => {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 30);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
@@ -38,7 +49,7 @@ export default function Navbar() {
         <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
           <a href="#blog">Blog</a>
         </li>
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
+        <li className="hover:text-[#3D59FA] cursor-pointer delay-100" onClick={handleClick}>
           <a href="#contact">Contact</a>
         </li>
       </ul>
@@ -96,7 +107,7 @@ export default function Navbar() {
                   <a href="#blog">Blog</a>
                 </li>
                 <li className="py-4 pl-6">
-                  <a href="#contact">Contact</a>
+                  <a href="#contact" onClick={handleClick}>Contact</a>
                 </li>
               </ul>
             </div>
