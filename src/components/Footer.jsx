@@ -99,8 +99,8 @@ export default function Footer() {
         </div>
         <div>
           <p className="text-center">
-            copyright @ 2025 PentatonicsTech. All Rights Reserved by{" "}
-            <a className="text-[#E13259]" href="pentatonicstech.com">
+            copyright &copy; 2025 PentatonicsTech. All Rights Reserved by{" "}
+            <a className="text-[#E13259]" href="https://pentatonics-tech.vercel.app/">
               pentatonicstech.com
             </a>
           </p>
