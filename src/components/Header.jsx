@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import { FaTelegram, FaYoutube, FaTiktok, FaFacebook } from "react-icons/fa";
 import { MdWifiCalling3 } from "react-icons/md";
