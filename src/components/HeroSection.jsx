@@ -1,12 +1,13 @@
+import Image from "next/image";
 import React from "react";
 
 export default function HeroSection() {
   return (
     <div
-      className="lg:grid lg:grid-cols-2 lg:items-center bg-cover bg-center h-fit lg:h-screen w-full"
+      className="relative lg:grid lg:grid-cols-2 lg:items-center bg-cover bg-center h-fit lg:h-screen w-full"
       style={{ backgroundImage: 'url("/home.png")' }}
     >
-      <div className="mx-auto max-w-[70%] space-y-5 lg:space-y-10 max-lg:pt-32">
+      <div className="mx-auto max-w-[70%] space-y-5 lg:space-y-10 max-lg:pt-32 z-50">
         <h1 className="text-white text-[36px] lg:text-[40px] font-bold text-center">
           Trusted Effective Service and Solutions
         </h1>
@@ -26,7 +27,37 @@ export default function HeroSection() {
       </div>
       <div className="flex justify-center">
         <div className="w-[90%] mx-auto py-7">
-          <img className="w-full" src="/banner-img.png" alt="" />
+          <img
+            className="w-full animate-custom-scale"
+            src="/banner-img.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div className="w-full h-full">
+        {/* Shape 1 */}
+        <div className="absolute top-24 left-32 animate-rotate-infinite">
+          <Image src="/shape4.png" alt="Shape 1" width={35} height={35} />
+        </div>
+
+        {/* Shape 2 */}
+        <div className="absolute top-52 right-[100px] lg:right-[700px] animate-triangle-move">
+          <Image src="/shape5.png" alt="Shape 2" width={40} height={40} />
+        </div>
+
+        {/* Shape 3 */}
+        <div className="absolute bottom-52 left-32 animate-rectangle-move">
+          <Image src="/shape1.png" alt="Shape 3" width={40} height={40} />
+        </div>
+
+        {/* Shape 4 */}
+        <div className="absolute bottom-16 right-[300px] lg:right-[700px] animate-rotate-infinite">
+          <Image src="/shape3.png" alt="Shape 4" width={45} height={45} />
+        </div>
+
+        {/* Shape 5 */}
+        <div className="absolute bottom-48 right-16 animate-rectangle-move">
+          <Image src="/shape6.png" alt="Shape 4" width={40} height={40} />
         </div>
       </div>
     </div>
