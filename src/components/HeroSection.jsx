@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import React from "react";
@@ -6,10 +6,11 @@ import React from "react";
 export default function HeroSection() {
   return (
     <div
-      className="relative lg:grid lg:grid-cols-2 lg:items-center bg-cover bg-center h-fit lg:h-screen w-full"
+      className="relative bg-cover bg-center h-fit w-full"
       style={{ backgroundImage: 'url("/home.png")' }}
     >
-      <div className="mx-auto max-w-[70%] space-y-5 lg:space-y-10 max-lg:pt-32 z-50">
+      <div className="max-w-[1300px] mx-auto lg:grid lg:grid-cols-2 lg:items-center lg:py-32">
+      <div className="mx-auto max-w-[70%] space-y-5 lg:space-y-10 max-lg:pt-32 z-32">
         <h1 className="text-white text-[36px] lg:text-[40px] font-bold text-center">
           Trusted Effective Service and Solutions
         </h1>
@@ -19,9 +20,11 @@ export default function HeroSection() {
           some great pain. Who had suspended him.
         </h3>
         <div className="flex justify-center lg:justify-start gap-5 text-[14px] text-[#F5FAFF]">
-          <button className="h-[40px] w-[112px] bg-[#3D59FA] rounded-md hover:bg-[#F5FAFF] hover:text-[#051242] ease-in-out delay-100">
-            Contact Us
-          </button>
+          <a href="#contact">
+            <button className="h-[40px] w-[112px] bg-[#3D59FA] rounded-md hover:bg-[#F5FAFF] hover:text-[#051242] ease-in-out delay-100">
+              Contact Us
+            </button>
+          </a>
           <button className="h-[40px] w-[112px] border-[#F5FAFF] border-2 rounded-md hover:bg-[#F5FAFF] hover:text-[#051242] ease-in-out delay-100">
             Know More
           </button>
@@ -36,7 +39,7 @@ export default function HeroSection() {
           />
         </div>
       </div>
-      <div className="w-full h-full">
+      <div className="max-w-[1300px] mx-auto h-full bg-slate-600">
         {/* Shape 1 */}
         <div className="absolute top-24 left-32 animate-rotate-infinite">
           <Image src="/shape4.png" alt="Shape 1" width={35} height={35} />
@@ -61,6 +64,7 @@ export default function HeroSection() {
         <div className="absolute bottom-48 right-16 animate-rectangle-move">
           <Image src="/shape6.png" alt="Shape 4" width={40} height={40} />
         </div>
+      </div>
       </div>
     </div>
   );

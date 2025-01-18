@@ -6,15 +6,15 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const handleClick = (e) => {
+  const handleClick = (e, targetId) => {
     e.preventDefault();
-    setIsOpen(false);
+    setIsOpen(false); // Close mobile menu if open
 
-    const target = document.getElementById("contact");
+    const target = document.getElementById(targetId);
 
-    setTimeout(() => {
+    if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 30);
+    }
   };
 
   useEffect(() => {
@@ -37,22 +37,15 @@ export default function Navbar() {
       }`}
     >
       <ul className="flex max-w-[1300px] mx-auto max-lg:hidden w-full justify-start items-center gap-10 text-[18px] text-white">
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
-          <a href="#home">Home</a>
-        </li>
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
-          <a href="#about">About</a>
-        </li>
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
-          <a href="#solutions">Solutions</a>
-        </li>
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100">
-          <a href="#blog">Blog</a>
-        </li>
-        <li className="hover:text-[#3D59FA] cursor-pointer delay-100" onClick={handleClick}>
-          <a href="#contact">Contact</a>
-        </li>
+        {["home", "about", "services", "blog", "contact"].map((item) => (
+          <li key={item} className="hover:text-[#3D59FA] cursor-pointer delay-100">
+            <a href={`#${item}`} onClick={(e) => handleClick(e, item)}>
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </a>
+          </li>
+        ))}
       </ul>
+
       <div className="lg:hidden w-full flex items-center">
         <div className="mx-6 flex items-center justify-between w-full relative">
           <div className="flex items-center gap-2">
@@ -94,21 +87,16 @@ export default function Navbar() {
           {isOpen && (
             <div>
               <ul className="absolute top-[70px] left-0 w-full bg-[#051242] text-white text-start transform transition-transform duration-300 ease-in-out animate-slide-down">
-                <li className="py-4 pl-6 border-b border-[#3D59FA]">
-                  <a href="#home">Home</a>
-                </li>
-                <li className="py-4 pl-6 border-b border-[#3D59FA]">
-                  <a href="#about">About</a>
-                </li>
-                <li className="py-4 pl-6 border-b border-[#3D59FA]">
-                  <a href="#solutions">Solutions</a>
-                </li>
-                <li className="py-4 pl-6 border-b border-[#3D59FA]">
-                  <a href="#blog">Blog</a>
-                </li>
-                <li className="py-4 pl-6">
-                  <a href="#contact" onClick={handleClick}>Contact</a>
-                </li>
+                {["home", "about", "services", "blog", "contact"].map((item) => (
+                  <li
+                    key={item}
+                    className="py-4 pl-6 border-b border-[#3D59FA]"
+                  >
+                    <a href={`#${item}`} onClick={(e) => handleClick(e, item)}>
+                      {item.charAt(0).toUpperCase() + item.slice(1)}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           )}

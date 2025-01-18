@@ -27,7 +27,7 @@ export default function ServiceSection() {
   ]
 
   return (
-    <div className="container py-20 max-w-[1300px] mx-auto">
+    <div className="container py-20 max-w-[1300px] mx-auto" id="services">
       <div className="text-center mb-[30px] lg:mb-[60px] max-w-[695px] mx-auto space-y-2">
         <p className="text-[14px] text-[#3D59FA]">Smart Service</p>
         <h1 className="text-[25px] md:text-[35px] lg:text-[40px] font-bold text-[#051242]">Provide All Kind Of Tech Solutions</h1>

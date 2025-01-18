@@ -39,9 +39,16 @@ export default function TeamMember() {
     centerMode: true,
     responsive: [
       {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -59,11 +66,11 @@ export default function TeamMember() {
           slidesToScroll: 1,
         },
       },
-    ],
+    ],  
   };
 
   return (
-    <div className="text-center mt-10">
+    <div className="text-center pt-20 max-w-[1300px] mx-auto">
       <div className="space-y-3">
         <h2 className="text-[14px] text-[#3D59FA]">Team Members</h2>
         <h1 className="text-[25px] md:text-[35px] lg:text-[40px] font-bold text-[#051242]">
