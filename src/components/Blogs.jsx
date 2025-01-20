@@ -31,7 +31,7 @@ export default function Blogs() {
   ];
 
   return (
-    <div className="max-w-[1300px] mx-auto my-10">
+    <div id="blog" className="max-w-[1300px] mx-auto my-10">
       <div className="text-center space-y-3">
         <h2 className="text-[14px] text-[#3D59FA]">Blog Post</h2>
         <h1 className="text-[25px] md:text-[35px] lg:text-[40px] font-bold text-[#051242]">
