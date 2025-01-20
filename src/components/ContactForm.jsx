@@ -20,10 +20,16 @@ export default function ContactForm() {
         </div>
         <div className="grid md:grid-cols-2 py-4 md:w-[85%] mx-auto">
           <div className="flex items-center justify-center">
-            <Image src="/contact.png" width={500} height={500} alt="contact" />
+            <Image
+              className="animate-updown"
+              src="/contact.png"
+              width={500}
+              height={500}
+              alt="contact"
+            />
           </div>
           <div className="py-5">
-            <form className="w-[75%] mx-auto flex flex-col gap-5 bg-white p-5 rounded-md">
+            <form className="w-[85%] mx-auto flex flex-col gap-5 bg-white p-5 rounded-md">
               <input
                 className="bg-[#F5FAFF] py-2 pl-3 focus:outline-[#3D59FA]"
                 type="text"
