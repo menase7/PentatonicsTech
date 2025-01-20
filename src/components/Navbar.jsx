@@ -38,8 +38,18 @@ export default function Navbar() {
     >
       <ul className="flex max-w-[1300px] mx-auto max-lg:hidden w-full justify-start items-center gap-10 text-[18px] text-white">
         {["home", "about", "services", "blog", "contact"].map((item) => (
-          <li key={item} className="hover:text-[#3D59FA] cursor-pointer delay-100">
-            <a href={`#${item}`} onClick={(e) => handleClick(e, item)}>
+          <li
+            key={item}
+            className="hover:text-[#3D59FA] cursor-pointer delay-100"
+          >
+            <a
+              href={item === "about" ? "/about" : `/#${item}`}
+              onClick={(e) => {
+                if (item !== "about") {
+                  handleClick(e, item);
+                }
+              }}
+            >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </a>
           </li>
@@ -54,7 +64,7 @@ export default function Navbar() {
                 width={40}
                 height={40}
                 className="h-full w-full object-cover"
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="logo"
               />
             </div>
@@ -63,22 +73,22 @@ export default function Navbar() {
           <div className="w-full flex justify-end">
             <div className="flex bg-[#F5FAFF] items-center justify-center p-2">
               <button
-                className="relative w-10 h-8 flex flex-col justify-between items-center group"
+                className="relative w-9 h-6 flex flex-col justify-between items-center group"
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <span
-                  className={`block h-1 w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
-                    isOpen ? "rotate-45 translate-y-[14px]" : ""
+                  className={`block h-[2px] w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
+                    isOpen ? "rotate-45 translate-y-[10px]" : ""
                   }`}
                 ></span>
                 <span
-                  className={`block h-1 w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
+                  className={`block h-[2px] w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
                     isOpen ? "opacity-0" : ""
                   }`}
                 ></span>
                 <span
-                  className={`block h-1 w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
-                    isOpen ? "-rotate-45 -translate-y-[14px]" : ""
+                  className={`block h-[2px] w-full bg-[#3D59FA] rounded transition-all duration-200 ease-in-out ${
+                    isOpen ? "-rotate-45 -translate-y-[12px]" : ""
                   }`}
                 ></span>
               </button>
@@ -86,17 +96,26 @@ export default function Navbar() {
           </div>
           {isOpen && (
             <div>
-              <ul className="absolute top-[70px] left-0 w-full bg-[#051242] text-white text-start transform transition-transform duration-300 ease-in-out animate-slide-down">
-                {["home", "about", "services", "blog", "contact"].map((item) => (
-                  <li
-                    key={item}
-                    className="py-4 pl-6 border-b border-[#3D59FA]"
-                  >
-                    <a href={`#${item}`} onClick={(e) => handleClick(e, item)}>
-                      {item.charAt(0).toUpperCase() + item.slice(1)}
-                    </a>
-                  </li>
-                ))}
+              <ul className="absolute top-[64px] left-0 w-full bg-[#051242] text-white text-start transform transition-transform duration-300 ease-in-out animate-slide-down">
+                {["home", "about", "services", "blog", "contact"].map(
+                  (item) => (
+                    <li
+                      key={item}
+                      className="py-4 pl-6 border-b border-[#3D59FA]"
+                    >
+                      <a
+                        href={item === "about" ? "/about" : `/#${item}`}
+                        onClick={(e) => {
+                          if (item !== "about") {
+                            handleClick(e, item);
+                          }
+                        }}
+                      >
+                        {item.charAt(0).toUpperCase() + item.slice(1)}
+                      </a>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           )}

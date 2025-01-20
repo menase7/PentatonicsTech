@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="flex flex-col lg:mr-10 gap-6 pb-7 w-fit">
           <div className="flex items-center gap-2">
             <div className="w-[50px] h-[50px]">
-              <Image src="/logo.jpg" width={100} height={100} alt="logo" />
+              <Image src="/logo.png" width={100} height={100} alt="logo" />
             </div>
             <p className="text-[#fff] text-3xl font-bold">PentatonicsTech</p>
           </div>
