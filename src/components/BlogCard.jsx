@@ -5,22 +5,29 @@ import React from "react";
 
 export default function BlogCard({ img, title, description, date }) {
   return (
-    <div className="bg-[#F5FAFF] my-3 flex flex-col items-center justify-center group relative">
-      <div className="w-auto">
+    <div className="relative bg-[#F5FAFF] my-3 flex flex-col items-center justify-center group rounded-t-lg overflow-hidden">
+      <div className="absolute inset-0 bg-[#374168] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+
+      <div className="relative z-10 w-auto">
         <Image
-          className="w-[350px] md:w-[400px] rounded-t-sm"
+          className="w-[355px] md:w-[410px] rounded-t-sm"
           src={img}
           width={300}
-          height={300}
+          height={200}
           alt="team card"
         />
       </div>
-      <div className="group-hover:bg-[#051242] text-[#051242] group-hover:text-white pb-3 max-w-[350px] md:max-w-[400px] h-fit text-start flex flex-col items-center justify-center gap-1 px-3">
-        <h1 className="py-2 text-[21px] font-bold">{title}</h1>
-        <p className="text-[14px] text-[#8689a3] group-hover:text-[#c0c0c3]">
+      <div className="relative z-10 pb-3 max-w-[350px] md:max-w-[400px] h-fit text-start flex flex-col items-center justify-center px-3">
+        <p className="text-start w-full text-[#80839d] group-hover:text-[#c0c0c3] pt-2 text-sm">{date}</p>
+        <h1 className="py-2 text-[21px] text-[#051242] font-bold group-hover:text-white transition-colors duration-500">
+          {title}
+        </h1>
+        <p className="text-[14px] text-[#8689a3] group-hover:text-[#c0c0c3] transition-colors duration-500">
           {description}
         </p>
-        <button className="w-full text-start pt-1">Read More</button>
+        <button className="w-full text-start pt-1 group-hover:text-white transition-colors duration-500 text-[#051242]">
+          Read More
+        </button>
       </div>
     </div>
   );
