@@ -6,47 +6,53 @@ import BlogCard from "./BlogCard";
 export default function Blogs() {
   const blogs = [
     {
-      img: "/team1.jpg",
-      title: "Temperature App UX Studies & Development Case",
+      img: "/selected.png",
+      title:
+        "Exciting News: Our Startup Is Selected for OIH’s Prestigious Program!",
       description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pleasure in flees the smallest ways perspiciatis nam aspernatur porro",
+        "We are excited to announce that our startup has been selected for the OIH program, facilitated in partnership with the Mastercard Foundation and Ethiopian Airlines. This incredible opportunity provides mentorship, funding, and networking to help us expand and take our platform to new heights",
       date: "april 10, 2024",
     },
     {
-      img: "/team3.jpg",
-      title: "Joe's Company Software Development Case",
+      img: "/certeficate.png",
+      title:
+        "We’ve Received Certification in Business Development and Product Innovation!",
       description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pleasure in flees the smallest ways perspiciatis nam aspernatur porro",
+        "We’re thrilled to announce that our team has successfully completed the Basics of Business Development Training, Consultation, and Product Development Masterclass provided by Orbit Innovation Hub. This certification marks a significant achievement in strengthening our skills in business strategy and product innovation",
       date: "april 20, 2024",
     },
     {
-      img: "/team2.jpg",
-      title: "IT Software Company Development Case",
+      img: "/ideasharing.png",
+      title: "Sharing Our Startup Business Model and How It Works",
       description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pleasure in flees the smallest ways perspiciatis nam aspernatur porro",
+        "Recently, we had the opportunity to share our startup business model with fellow entrepreneurs. It was an exciting experience where we explained how our platform works, the value we bring to our users, and the impact we aim to create.",
       date: "april 30, 2024",
-    }
+    },
   ];
 
   return (
-    <div className="max-w-[1300px] mx-auto">
+    <div className="max-w-[1300px] mx-auto my-10">
       <div className="text-center space-y-3">
         <h2 className="text-[14px] text-[#3D59FA]">Blog Post</h2>
         <h1 className="text-[25px] md:text-[35px] lg:text-[40px] font-bold text-[#051242]">
-          Our Regular Blogs
+          Updates, Insights, and More
         </h1>
         <p className="md:w-[60%] mx-auto text-[15px] text-[#7A7E9A]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. A facilis vel
-          consequatur tempora atque blanditiis exercitationem incidunt, alias
-          corporis quam assumenda dicta.
+          Explore our blog for the latest updates, achievements, and insights
+          from our startup journey. Stay tuned for exciting milestones as we
+          continue to grow and make an impact in Ethiopian music education.
         </p>
       </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:px-5">
-        {
-          blogs.map((blog, index)=>(
-            <BlogCard key={index} img={blog.img} title={blog.title} description={blog.description} date={blog.date} />
-          ))
-        }
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start sm:px-5">
+        {blogs.map((blog, index) => (
+          <BlogCard
+            key={index}
+            img={blog.img}
+            title={blog.title}
+            description={blog.description}
+            date={blog.date}
+          />
+        ))}
       </div>
     </div>
   );

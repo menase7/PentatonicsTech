@@ -14,7 +14,7 @@ export default function Header() {
             <div className="h-[40px] w-[40px]">
               <img
                 className="h-full w-full object-cover"
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="logo"
               />
             </div>

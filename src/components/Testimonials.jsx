@@ -59,7 +59,7 @@ export default function Testimonials() {
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 700,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
