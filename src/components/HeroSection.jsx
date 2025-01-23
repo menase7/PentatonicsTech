@@ -25,9 +25,11 @@ export default function HeroSection() {
               Contact Us
             </button>
           </a>
+          <a href="/about">
           <button className="h-[40px] w-[112px] border-[#F5FAFF] border-2 rounded-md hover:bg-[#F5FAFF] hover:text-[#051242] ease-in-out delay-100">
             Know More
           </button>
+          </a>
         </div>
       </div>
       <div className="flex justify-center">
