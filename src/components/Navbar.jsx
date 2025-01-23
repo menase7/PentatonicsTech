@@ -6,14 +6,44 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const handleClick = (e, targetId) => {
-    e.preventDefault();
-    setIsOpen(false); // Close mobile menu if open
-
+  // Smooth scroll function with controlled speed
+  const smoothScrollTo = (targetId) => {
     const target = document.getElementById(targetId);
 
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!target) return;
+
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 500;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    requestAnimationFrame(animation);
+  };
+
+  // Ease-in-out quadratic function
+  const easeInOutQuad = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  const handleClick = (e, targetId) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (targetId) {
+      smoothScrollTo(targetId);
     }
   };
 
@@ -43,7 +73,13 @@ export default function Navbar() {
             className="hover:text-[#3D59FA] cursor-pointer delay-100"
           >
             <a
-              href={item === "about" ? "/about" : `/#${item}`}
+              href={
+                item === "about"
+                  ? "/about"
+                  : item === "home"
+                  ? "/"
+                  : `/#${item}`
+              }
               onClick={(e) => {
                 if (item !== "about") {
                   handleClick(e, item);
@@ -59,15 +95,17 @@ export default function Navbar() {
       <div className="lg:hidden w-full flex items-center">
         <div className="mx-6 flex items-center justify-between w-full relative">
           <div className="flex items-center gap-2">
-            <div className="h-[40px] w-[40px]">
-              <Image
-                width={40}
-                height={40}
-                className="h-full w-full object-cover"
-                src="/logo.png"
-                alt="logo"
-              />
-            </div>
+            <a href="/">
+              <div className="h-[40px] w-[40px]">
+                <Image
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-cover"
+                  src="/logo.png"
+                  alt="logo"
+                />
+              </div>
+            </a>
             <p className="text-[#3D59FA] text-3xl font-bold">PentatonicsTech</p>
           </div>
           <div className="w-full flex justify-end">
@@ -104,7 +142,13 @@ export default function Navbar() {
                       className="py-4 pl-6 border-b border-[#3D59FA]"
                     >
                       <a
-                        href={item === "about" ? "/about" : `/#${item}`}
+                        href={
+                          item === "about"
+                            ? "/about"
+                            : item === "home"
+                            ? "/"
+                            : `/#${item}`
+                        }
                         onClick={(e) => {
                           if (item !== "about") {
                             handleClick(e, item);

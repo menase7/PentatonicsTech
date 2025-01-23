@@ -5,16 +5,41 @@ import React from "react";
 import { FaFacebook, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
+  const smoothScrollTo = (targetId) => {
+    const target = document.getElementById(targetId);
+
+    if (!target) return;
+
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 500;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    requestAnimationFrame(animation);
+  };
+
+  // Ease-in-out quadratic function
+  const easeInOutQuad = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
 
   const handleClick = (e, targetId) => {
     e.preventDefault();
-  
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    smoothScrollTo(targetId);
   };
-  
 
   return (
     <div
@@ -62,7 +87,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 md:pl-10 max-lg:pl-0">
           <p className="text-[22px] font-semibold">Our Service</p>
           <ul className="space-y-2">
             <div className="h-[1px] bg-[#c2c2c2]"></div>
@@ -77,13 +102,13 @@ export default function Footer() {
             <div className="h-[1px] bg-[#c2c2c2]"></div>
             <li>FAQs</li>
             <li>Services</li>
-            <li>career</li>
+            <li>Career</li>
             <li>Privacy Policy</li>
             <li>Terms & Conditions</li>
             <li>Data Analysis</li>
           </ul>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 md:pl-10 max-lg:pl-0">
           <p className="text-[22px] font-semibold">Contact</p>
           <ul className="space-y-2">
             <div className="h-[1px] bg-[#c2c2c2]"></div>
@@ -107,7 +132,7 @@ export default function Footer() {
       <div className="h-[1px] bg-[#c2c2c2]"></div>
       <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row lg:justify-between items-center gap-2 pt-3 px-5">
         <div>
-          <ul className="flex max-w-[1300px] mx-auto w-full justify-start items-center gap-3 md:gap-6 text-lg text-white">
+          <ul className="flex max-w-[1300px] mx-auto w-full justify-start items-center gap-3 md:gap-6 text-[16px] text-white">
             {["home", "about", "services", "blog", "contact"].map((item) => (
               <li
                 key={item}
