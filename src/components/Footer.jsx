@@ -1,10 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { FaFacebook, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleSubscribe = async () => {
+    if (!email) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/subscribers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.status == 201) {
+        setSuccessMessage("Subscribed successfully!");
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.message || "Failed to subscribe.");
+      }
+    } catch (error) {
+      console.error("Subscription error:", error);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setEmail("");
+    }
+  };
+
   const smoothScrollTo = (targetId) => {
     const target = document.getElementById(targetId);
 
@@ -58,14 +91,23 @@ export default function Footer() {
             It's very important to have a good customer, let the customer know,
             but that's the way it is.
           </p>
+          {
+            successMessage && (
+              <p className="text-green-500">{successMessage}</p>
+            )
+          }
           <div className="flex rounded-md h-[50px] max-w-[300px]">
             <input
               className="bg-transparent border-2 w-full pl-3"
               placeholder="Your email"
               type="email"
-              name=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="bg-[#3D59FA] rounded-r-md text-white px-3 -ml-1">
+            <button
+              className="bg-[#3D59FA] rounded-r-md text-white px-3 -ml-1"
+              onClick={handleSubscribe}
+            >
               Subscribe
             </button>
           </div>
