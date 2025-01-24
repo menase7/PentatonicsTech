@@ -10,7 +10,7 @@ export default function BlogCard({ img, title, description, date }) {
 
       <div className="relative z-10 w-auto">
         <Image
-          className="w-[355px] md:w-[410px] rounded-t-sm"
+          className="w-[355px] md:w-[410px] h-[300px] rounded-t-sm overflow-hidden object-cover"
           src={img}
           width={300}
           height={200}
