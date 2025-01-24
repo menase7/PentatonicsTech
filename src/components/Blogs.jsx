@@ -1,34 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
+import { PropagateLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 export default function Blogs() {
-  const blogs = [
-    {
-      img: "/selected.png",
-      title:
-        "Exciting News: Our Startup Is Selected for OIH’s Prestigious Program!",
-      description:
-        "We are excited to announce that our startup has been selected for the OIH program, facilitated in partnership with the Mastercard Foundation and Ethiopian Airlines. This incredible opportunity provides mentorship, funding, and networking to help us expand and take our platform to new heights",
-      date: "april 10, 2024",
-    },
-    {
-      img: "/certeficate.png",
-      title:
-        "We’ve Received Certification in Business Development and Product Innovation!",
-      description:
-        "We’re thrilled to announce that our team has successfully completed the Basics of Business Development Training, Consultation, and Product Development Masterclass provided by Orbit Innovation Hub. This certification marks a significant achievement in strengthening our skills in business strategy and product innovation",
-      date: "april 20, 2024",
-    },
-    {
-      img: "/ideasharing.png",
-      title: "Sharing Our Startup Business Model and How It Works",
-      description:
-        "Recently, we had the opportunity to share our startup business model with fellow entrepreneurs. It was an exciting experience where we explained how our platform works, the value we bring to our users, and the impact we aim to create.",
-      date: "april 30, 2024",
-    },
-  ];
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch("/api/blogs");
+        if (response.ok) {
+          const data = await response.json();
+          console.log("the blogs",data)
+          setBlogs(data);
+        } else {
+          throw new Error("Failed to fetch blogs");
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        toast.error("Failed to load blogs. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <div id="blog" className="max-w-[1300px] mx-auto my-10">
@@ -44,15 +45,23 @@ export default function Blogs() {
         </p>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start sm:px-5">
-        {blogs.map((blog, index) => (
-          <BlogCard
-            key={index}
-            img={blog.img}
-            title={blog.title}
-            description={blog.description}
-            date={blog.date}
-          />
-        ))}
+        {loading ? (
+          <div className="col-span-full flex justify-center items-center my-10">
+            <PropagateLoader color="#3D59FA" size={15} />
+          </div>
+        ) : blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <BlogCard
+              key={blog._id} 
+              img={blog.image} 
+              title={blog.title}
+              description={blog.content}
+              date={new Date(blog.createdAt).toLocaleDateString()}
+            />
+          ))
+        ) : (
+          <p className="text-center col-span-full">No blogs available.</p>
+        )}
       </div>
     </div>
   );
