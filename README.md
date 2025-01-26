@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Website
 
-You can view the deployed website here: [Your Website Name](https://pentatonics-tech.vercel.app/)
+You can view the deployed website here: [pentatonicstech.com](https://pentatonics-tech.vercel.app/)
 
 ## Getting Started
 
