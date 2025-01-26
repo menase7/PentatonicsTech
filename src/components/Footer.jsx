@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaFacebook, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -91,11 +94,7 @@ export default function Footer() {
             It's very important to have a good customer, let the customer know,
             but that's the way it is.
           </p>
-          {
-            successMessage && (
-              <p className="text-green-500">{successMessage}</p>
-            )
-          }
+          {successMessage && <p className="text-green-500">{successMessage}</p>}
           <div className="flex rounded-md h-[50px] max-w-[300px]">
             <input
               className="bg-transparent border-2 w-full pl-3"
@@ -174,18 +173,40 @@ export default function Footer() {
       <div className="h-[1px] bg-[#c2c2c2]"></div>
       <div className="max-w-[1300px] mx-auto flex flex-col lg:flex-row lg:justify-between items-center gap-2 pt-3 px-5">
         <div>
-          <ul className="flex max-w-[1300px] mx-auto w-full justify-start items-center gap-3 md:gap-6 text-[16px] text-white">
-            {["home", "about", "services", "blog", "contact"].map((item) => (
-              <li
-                key={item}
-                className="hover:text-[#3D59FA] cursor-pointer delay-100"
-              >
-                <a href={`#${item}`} onClick={(e) => handleClick(e, item)}>
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {pathname !== "/" ? (
+            <div className="flex items-center max-w-[1300px] mx-auto w-full">
+              <Link href="/">
+                <button
+                  className={`
+                     text-[#8e9ef8] text-[16px] hover:text-[#3D59FA] cursor-pointer`}
+                >
+                  &larr; Back to Home
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <ul className="flex max-w-[1300px] mx-auto w-full justify-start items-center gap-3 md:gap-6 text-[16px] text-white">
+              {["home", "about", "services", "blog", "contact"].map((item) => (
+                <li
+                  key={item}
+                  className="hover:text-[#3D59FA] cursor-pointer delay-100"
+                >
+                  <Link
+                    href={
+                      item === "about"
+                        ? "/about"
+                        : item === "home"
+                        ? "/"
+                        : `/#${item}`
+                    }
+                    scroll={false}
+                  >
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <div>
           <p className="text-center">
