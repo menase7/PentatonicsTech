@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Smooth scroll function with controlled speed
   const smoothScrollTo = (targetId) => {
     const target = document.getElementById(targetId);
 
@@ -30,7 +31,6 @@ export default function Navbar() {
     requestAnimationFrame(animation);
   };
 
-  // Ease-in-out quadratic function
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -60,37 +60,49 @@ export default function Navbar() {
 
   return (
     <div
-      className={`fixed flex top-0 left-0 w-full h-[88px] z-50 transition-all duration-100 ${
+      className={`fixed max-lg:bg-[#051242] flex top-0 left-0 w-full h-[88px] z-50 transition-all duration-100 ${
         scrolled
           ? "bg-[#051242] shadow-sm shadow-gray-200"
           : "bg-transparent mt-14"
       }`}
     >
-      <ul className="flex max-w-[1300px] mx-auto max-lg:hidden w-full justify-start items-center gap-10 text-[18px] text-white">
-        {["home", "about", "services", "blog", "contact"].map((item) => (
-          <li
-            key={item}
-            className="hover:text-[#3D59FA] cursor-pointer delay-100"
+       {pathname !== "/" ? (
+        <div className="max-lg:hidden flex items-center max-w-[1300px] mx-auto w-full">
+          <a href="/">
+          <button
+            className={`${scrolled ? "text-white": "text-[#8e9ef8]"} text-[18px] hover:text-[#3D59FA] cursor-pointer`}
           >
-            <a
-              href={
-                item === "about"
-                  ? "/about"
-                  : item === "home"
-                  ? "/"
-                  : `/#${item}`
-              }
-              onClick={(e) => {
-                if (item !== "about") {
-                  handleClick(e, item);
-                }
-              }}
+            &larr; Back to Home
+          </button>
+          </a>
+        </div>
+      ) : (
+        <ul className="flex max-w-[1300px] mx-auto max-lg:hidden w-full justify-start items-center gap-10 text-[18px] text-white">
+          {["home", "about", "services", "blog", "contact"].map((item) => (
+            <li
+              key={item}
+              className="hover:text-[#3D59FA] cursor-pointer delay-100"
             >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
-            </a>
-          </li>
-        ))}
-      </ul>
+              <a
+                href={
+                  item === "about"
+                    ? "/about"
+                    : item === "home"
+                    ? "/"
+                    : `/#${item}`
+                }
+                onClick={(e) => {
+                  if (item !== "about") {
+                    handleClick(e, item);
+                  }
+                }}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className="lg:hidden w-full flex items-center">
         <div className="mx-6 flex items-center justify-between w-full relative">
@@ -139,7 +151,7 @@ export default function Navbar() {
                   (item) => (
                     <li
                       key={item}
-                      className="py-4 pl-6 border-b border-[#3D59FA]"
+                      className="py-4 pl-6 border-b border-[#3D59FA] hover:text-[#3D59FA]"
                     >
                       <a
                         href={
