@@ -6,7 +6,7 @@ import { Readable } from "stream";
 import connectToDatabase from "@/lib/db";
 import BlogPost from "@/models/BlogPost";
 import Subscriber from "@/models/Subscriber";
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 // Disable the default body parser
 export const config = {
@@ -46,7 +46,6 @@ const parseForm = async (req) => {
   });
 };
 
-
 export async function POST(req) {
   try {
     // Parse form data
@@ -54,20 +53,24 @@ export async function POST(req) {
     rawReq.headers = Object.fromEntries(req.headers);
     const { fields, files } = await parseForm(rawReq);
 
-    console.log('Parsed Fields:', fields);
-    console.log('Parsed Files:', files);
+    console.log("Parsed Fields:", fields);
+    console.log("Parsed Files:", files);
 
     const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
-    const content = Array.isArray(fields.content) ? fields.content[0] : fields.content;
+    const content = Array.isArray(fields.content)
+      ? fields.content[0]
+      : fields.content;
 
     const imageFile = files.image ? files.image[0] : null;
-    const imagePath = imageFile ? `/uploads/${path.basename(imageFile.filepath)}` : null;
+    const imagePath = imageFile
+      ? `/uploads/${path.basename(imageFile.filepath)}`
+      : null;
 
-    console.log('Image Path:', imagePath);
+    console.log("Image Path:", imagePath);
 
     if (!title || !content) {
       return NextResponse.json(
-        { message: 'Title and content are required' },
+        { message: "Title and content are required" },
         { status: 400 }
       );
     }
@@ -83,14 +86,13 @@ export async function POST(req) {
     });
     await newPost.save();
 
-    console.log('Blog post created:', newPost);
+    console.log("Blog post created:", newPost);
 
-    // Send email to subscribers
     const subscribers = await Subscriber.find({ isSubscribed: true });
 
     if (subscribers.length > 0) {
       const transporter = nodemailer.createTransport({
-        service: 'gmail', // Change this to your email service
+        service: "gmail", // Change this to your email service
         auth: {
           user: "menasedebel838@gmail.com", // Your email
           pass: "iefd bzlj fept fpyq", // Your email password
@@ -109,30 +111,45 @@ export async function POST(req) {
           subject: emailSubject,
           text: emailText,
           html: `
-            <h1>${newPost.title}</h1>
-            <p>${newPost.content}</p>
-            <a href="http://yourwebsite.com/blog/${newPost._id}">Read more</a>
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow: hidden;">
+  <div style="background-color: #3D59FA; color: #ffffff; text-align: center; padding: 20px;">
+    <h1 style="margin: 0; font-size: 24px; line-height: 1.5;">${newPost.title}</h1>
+  </div>
+
+  <div style="text-align: center; padding: 20px;">
+    <img src="https://pentatonics-tech.vercel.app/${newPost.image}" alt="${newPost.title}" style="width: 100%; max-width: 560px; border-radius: 8px;" />
+  </div>
+
+  <div style="padding: 20px; color: #333333;">
+    <p style="line-height: 1.6; margin-bottom: 15px;">${newPost.content}</p>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px; padding-bottom: 20px;">
+    <a href="https://pentatonics-tech.vercel.app/blog/${newPost._id}" style="display: inline-block; padding: 10px 20px; background-color: #3D59FA; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px;">
+      Read More
+    </a>
+  </div>
+</div>
           `,
         });
       });
 
       await Promise.all(emailPromises);
 
-      console.log('Emails sent to subscribers');
+      console.log("Emails sent to subscribers");
     } else {
-      console.log('No subscribers found');
+      console.log("No subscribers found");
     }
 
     return NextResponse.json(newPost, { status: 201 });
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return NextResponse.json(
       { message: `Error creating blog post: ${error.message}` },
       { status: 500 }
     );
   }
 }
-
 
 export async function GET(req) {
   try {
@@ -155,7 +172,6 @@ export async function GET(req) {
   }
 }
 
-
 export async function PUT(req, { params }) {
   try {
     const { id } = params;
@@ -165,20 +181,24 @@ export async function PUT(req, { params }) {
     rawReq.headers = Object.fromEntries(req.headers);
     const { fields, files } = await parseForm(rawReq);
 
-    console.log('Parsed Fields:', fields);
-    console.log('Parsed Files:', files);
+    console.log("Parsed Fields:", fields);
+    console.log("Parsed Files:", files);
 
     const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
-    const content = Array.isArray(fields.content) ? fields.content[0] : fields.content;
+    const content = Array.isArray(fields.content)
+      ? fields.content[0]
+      : fields.content;
 
     const imageFile = files.image ? files.image[0] : null;
-    const imagePath = imageFile ? `/uploads/${path.basename(imageFile.filepath)}` : null;
+    const imagePath = imageFile
+      ? `/uploads/${path.basename(imageFile.filepath)}`
+      : null;
 
-    console.log('Image Path:', imagePath);
+    console.log("Image Path:", imagePath);
 
     if (!title || !content) {
       return NextResponse.json(
-        { message: 'Title and content are required' },
+        { message: "Title and content are required" },
         { status: 400 }
       );
     }
@@ -190,7 +210,7 @@ export async function PUT(req, { params }) {
     const existingPost = await BlogPost.findById(id);
     if (!existingPost) {
       return NextResponse.json(
-        { message: 'Blog post not found' },
+        { message: "Blog post not found" },
         { status: 404 }
       );
     }
@@ -205,19 +225,18 @@ export async function PUT(req, { params }) {
     // Save the updated blog post
     await existingPost.save();
 
-    console.log('Blog post updated:', existingPost);
+    console.log("Blog post updated:", existingPost);
 
     // Return the updated blog post in the response
     return NextResponse.json(existingPost, { status: 200 });
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
     return NextResponse.json(
       { message: `Error updating blog post: ${error.message}` },
       { status: 500 }
     );
   }
 }
-
 
 export async function DELETE(req) {
   try {
