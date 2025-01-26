@@ -2,8 +2,23 @@
 
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
 
-export default function BlogCard({ img, title, description, date }) {
+export default function BlogCard({ id, img, title, description, date }) {
+  const router = useRouter();
+  const maxDescriptionLength = 200;
+
+  const truncateDescription = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
+
+  const handleReadMore = () => {
+    router.push(`/blogs/${id}`);
+  };
+
   return (
     <div className="relative bg-[#F5FAFF] my-3 flex flex-col items-center justify-center group rounded-t-lg overflow-hidden">
       <div className="absolute inset-0 bg-[#374168] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
@@ -23,9 +38,12 @@ export default function BlogCard({ img, title, description, date }) {
           {title}
         </h1>
         <p className="text-[14px] text-[#8689a3] group-hover:text-[#c0c0c3] transition-colors duration-500">
-          {description}
+          {truncateDescription(description, maxDescriptionLength)}
         </p>
-        <button className="w-full text-start pt-1 group-hover:text-white transition-colors duration-500 text-[#051242]">
+        <button
+          onClick={handleReadMore}
+          className="w-full text-start pt-1 group-hover:text-white transition-colors duration-500 text-[#051242]"
+        >
           Read More
         </button>
       </div>

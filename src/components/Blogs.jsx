@@ -53,6 +53,7 @@ export default function Blogs() {
           blogs.map((blog) => (
             <BlogCard
               key={blog._id} 
+              id={blog._id} 
               img={blog.image} 
               title={blog.title}
               description={blog.content}
