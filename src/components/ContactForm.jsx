@@ -1,9 +1,54 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contacts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSuccessMessage("Your message has been sent successfully!");
+        setFormData({ name: "", email: "", phoneNumber: "", message: "" });
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || "Something went wrong.");
+      }
+    } catch (error) {
+      setErrorMessage("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-[#F5FAFF]" id="contact">
       <div className="max-w-[1300px] mx-auto py-20">
@@ -29,32 +74,59 @@ export default function ContactForm() {
             />
           </div>
           <div className="py-5">
-            <form className="w-[85%] mx-auto flex flex-col gap-5 bg-white p-5 rounded-md">
+            {successMessage && (
+              <p className="text-green-500 text-center pb-3">{successMessage}</p>
+            )}
+            {errorMessage && (
+              <p className="text-red-500 text-center pb-3">{errorMessage}</p>
+            )}
+            <form
+              className="w-[85%] mx-auto flex flex-col gap-5 bg-white p-5 rounded-md"
+              onSubmit={handleSubmit}
+            >
               <input
                 className="bg-[#F5FAFF] py-2 pl-3 focus:outline-[#3D59FA]"
                 type="text"
                 placeholder="Your Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
               />
               <input
                 className="bg-[#F5FAFF] py-2 pl-3 focus:outline-[#3D59FA]"
                 type="email"
                 placeholder="Your Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
               <input
                 className="bg-[#F5FAFF] py-2 pl-3 focus:outline-[#3D59FA]"
                 type="text"
                 placeholder="Your Phone Number"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
               />
               <textarea
                 className="bg-[#F5FAFF] py-2 pl-3 focus:outline-[#3D59FA]"
-                name=""
-                id=""
+                name="message"
                 cols="25"
                 rows="8"
                 placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
               ></textarea>
-              <button className="bg-[#3D59FA] rounded-md text-white w-fit mx-auto px-8 py-2">
-                Submit
+              <button
+                type="submit"
+                className="bg-[#3D59FA] rounded-md text-white w-fit mx-auto px-8 py-2"
+                disabled={loading}
+              >
+                {loading ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>
