@@ -7,6 +7,9 @@ import connectToDatabase from "@/lib/db";
 import BlogPost from "@/models/BlogPost";
 import Subscriber from "@/models/Subscriber";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 // Disable the default body parser
 export const config = {
@@ -92,10 +95,10 @@ export async function POST(req) {
 
     if (subscribers.length > 0) {
       const transporter = nodemailer.createTransport({
-        service: "gmail", // Change this to your email service
+        service: process.env.EMAIL_SERVICE,
         auth: {
-          user: "menasedebel838@gmail.com", // Your email
-          pass: "iefd bzlj fept fpyq", // Your email password
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
         },
       });
 
@@ -117,7 +120,7 @@ export async function POST(req) {
   </div>
 
   <div style="text-align: center; padding: 20px;">
-    <img src="https://pentatonics-tech.vercel.app/${newPost.image}" alt="${newPost.title}" style="width: 100%; max-width: 560px; border-radius: 8px;" />
+    <img src="https://pentatonics-tech.vercel.app${newPost.image}" alt="${newPost.title}" style="width: 100%; max-width: 560px; border-radius: 8px;" />
   </div>
 
   <div style="padding: 20px; color: #333333;">
