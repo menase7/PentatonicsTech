@@ -21,7 +21,7 @@ export default function Header() {
             <p className="text-[#3D59FA] text-3xl font-bold">PentatonicsTech</p>
           </div>
         </a>
-        <div className="flex items-center justify-center flex-wrap lg:justify-end max-sm:py-2 gap-4 w-full">
+        <div className="flex items-center justify-center flex-wrap lg:justify-end max-sm:py-2 gap-1 sm:gap-4 w-full">
           <div className="flex items-center gap-1 text-[#3D59FA]">
             <MdWifiCalling3 />
             <a
@@ -31,7 +31,7 @@ export default function Header() {
               +251941620480
             </a>
           </div>
-          <div className="flex items-center gap-1 text-[#3D59FA]">
+          <div className="flex items-center gap-1 text-[#3D59FA] max-sm:pl-1">
             <IoMdMail />
             <a
               className="text-[#051242] hover:text-[#3D59FA]"
